@@ -2,31 +2,58 @@
     let step = $state(1);
 
     let form = {
-        // Cuenta
+        //1. Cuenta
         email: "",
         password: "",
         confirmPassword: "",
         birthDate: "",
 
-        // Perfil
+        //2. Perfil
         nombre: "",
         peso: "",
         edad: "",
         estatura: "",
         actividad: "",
 
-        // Ciclo
+        //3. Ciclo :)
         primeraMenstruacion: "",
         ciclo: "",
         periodo: "",
         regular: "",
 
-        // Periodo
+        // 4. Periodo :)s
         flujo: "",
         color: "",
         coagulos: "",
         dolor: "",
-        ubicacionDolor: ""
+        ubicacionDolor: "",
+
+        // 5. Sintomas frecuentes
+        acne: "",
+        caidaCabello: "",
+        VelloExcesivo: "",
+        AumentoPeso: "",
+        Fatiga: "",
+        Ansiedad: "",
+        cambiosHumor: "",
+        DolorRelaciones: "",
+
+        // 6. Salud Ginecologica
+        diagnosticosPrevios: "",
+        anticonceptivos: "",
+        tipoAnticonceptivo: "",
+        embarazos: "",
+        abortos: "",
+
+        // 7. Alimentación
+        TipoDieta: "",
+        ConsumoAzucar: "",
+        AguaDiaria: "",
+
+        // 8. Estilo de vida
+        HorasSueño: "",
+        Estrés: "",
+        ejercicioSemana: "",
     };
 
     function siguiente() {
@@ -40,33 +67,37 @@
     function finalizar() {
         console.log(form);
         // Aquí puedes enviar los datos a tu API
+        location.href = "/login"; // Redirige a la página de inicio de sesión después de finalizar
     }
 </script>
+
+
+<!-- Paso 1 - Crear cuenta -->
 {#if step === 1}
 <div class="card">
     <h2>Crear cuenta</h2>
-
     <input bind:value={form.email} placeholder="Correo electrónico">
-
     <input
         type="password"
         bind:value={form.password}
         placeholder="Contraseña">
-
     <input
         type="password"
         bind:value={form.confirmPassword}
         placeholder="Confirmar contraseña">
-
     <input
         type="date"
         bind:value={form.birthDate}>
-
-    <button on:click={siguiente}>
+    <button onclick={siguiente}>
         Crear cuenta
     </button>
+    <a href="/login">
+		Volver a iniciar sesión
+	</a>
 </div>
 {/if}
+
+<!-- Paso 2 - Bienvenida -->
 {#if step === 2}
 <div class="card">
 
@@ -93,14 +124,14 @@
 </select>
 
 <div class="buttons">
-    <button on:click={atras}>Atrás</button>
+    <button onclick={atras}>Atrás</button>
 
-    <button on:click={siguiente}>Siguiente</button>
+    <button onclick={siguiente}>Siguiente</button>
 </div>
 
 </div>
 {/if}
-
+<!-- Paso 3 - Ciclo menstrual -->
 {#if step === 3}
 <div class="card">
 
@@ -137,13 +168,14 @@
 </label>
 
 <div class="buttons">
-    <button on:click={atras}>Atrás</button>
+    <button onclick={atras}>Atrás</button>
 
-    <button on:click={siguiente}>Siguiente</button>
+    <button onclick={siguiente}>Siguiente</button>
 </div>
 
 </div>
 {/if}
+<!-- Paso 4 - Sobre tu periodo -->
 {#if step === 4}
 <div class="card">
 
@@ -182,15 +214,166 @@
     placeholder="Ubicación del dolor">
 
 <div class="buttons">
-    <button on:click={atras}>Atrás</button>
+    <button onclick={atras}>Atrás</button>
 
-    <button on:click={finalizar}>
-        Finalizar
+    <button onclick={siguiente}>
+        siguiente
     </button>
 </div>
 
 </div>
 {/if}
+
+<!-- Paso 5 - Sintomas frecuentes -->
+{#if step === 5}
+<div class="card">
+<h2>Sintomas frecuentes</h2>
+<select bind:value={form.acne}>
+    <option value="">Acné</option>
+    <option>si</option>
+    <option>No</option>
+</select>
+
+<select bind:value={form.caidaCabello}>
+    <option value="">Caída de cabello</option>
+    <option>si</option>
+    <option>No</option>
+</select>
+
+<select bind:value={form.VelloExcesivo}>
+    <option value="">Vello excesivo</option>
+    <option>si</option>
+    <option>No</option>
+</select>
+
+<select bind:value={form.AumentoPeso}>
+    <option value="">Aumento de peso</option>
+    <option>si</option>
+    <option>No</option>
+</select>
+
+<select bind:value={form.Fatiga}>
+    <option value="">Fatiga</option>
+    <option>si</option>
+    <option>No</option>
+</select>
+
+<select bind:value={form.Ansiedad}>
+    <option value="">Ansiedad</option>
+    <option>si</option>
+    <option>No</option>
+</select>
+
+<select bind:value={form.cambiosHumor}>
+    <option value="">Cambios de humor</option>
+    <option>si</option>
+    <option>No</option>
+</select>
+
+<select bind:value={form.DolorRelaciones}>
+    <option value="">Dolor durante relaciones sexuales</option>
+    <option>si</option>
+    <option>No</option>
+</select>
+
+<div class="buttons">
+    <button onclick={atras}>Atrás</button>
+
+    <button onclick={siguiente}>Siguiente</button>
+</div>
+</div>
+{/if}
+<!-- Paso 6 - Salud Ginecologica -->
+{#if step === 6}
+<div class="card">
+<h2>Salud Ginecologica</h2>
+<input bind:value={form.diagnosticosPrevios} placeholder="Diagnosticos previos">
+<select bind:value={form.anticonceptivos}>
+    <option value="">Anticonceptivos</option>
+    <option>si</option>
+    <option>No</option>
+</select>
+<input bind:value={form.tipoAnticonceptivo} placeholder="Tipo de anticonceptivo">
+<select bind:value={form.embarazos}>
+    <option value="">Embarazos</option>
+    <option>si</option>
+    <option>No</option>
+</select>
+<select bind:value={form.abortos}>
+    <option value="">Abortos</option>
+    <option>si</option>
+    <option>No</option>
+</select>
+
+<div class="buttons">
+    <button onclick={atras}>Atrás</button>
+
+    <button onclick={siguiente}>Siguiente</button>
+</div>
+
+</div>
+{/if}
+<!-- Paso 7 - Alimentación -->
+{#if step === 7}
+<div class="card">
+<h2>Alimentación</h2>
+
+<select bind:value={form.TipoDieta}>
+    <option value="">Tipo de dieta</option>
+    <option>Vegetariana</option>
+    <option>Vegana</option>
+    <option>Omnívora</option>
+    <option>keto</option>
+</select>
+
+<select bind:value={form.ConsumoAzucar}>
+    <option value="">Consumo de azúcar</option>
+    <option>Alto</option>
+    <option>Moderado</option>
+    <option>Bajo</option>
+</select>
+
+<input bind:value={form.AguaDiaria} placeholder="Agua diaria (litros)" />
+
+
+<div class="buttons">
+    <button onclick={atras}>Atrás</button>
+
+    <button onclick={siguiente}>Siguiente</button>
+</div>
+
+</div>
+{/if}
+<!-- Paso 8 - Estilo de vida -->
+{#if step === 8}
+<div class="card">
+<h2>Estilo de vida</h2>
+
+<input bind:value={form.HorasSueño} 
+placeholder="Horas de sueño">
+
+<select bind:value={form.Estrés}>
+    <option value="">Nivel de estrés</option>
+    <option>Bajo</option>
+    <option>Moderado</option>
+    <option>Alto</option>
+</select>
+
+<input
+    bind:value={form.ejercicioSemana}
+    placeholder="Ejercicio por semana (veces)">
+
+
+<div class="buttons">
+    <button onclick={atras}>Atrás</button>
+
+    <button onclick={finalizar}>Finalizar</button>
+</div>
+
+</div>
+{/if}
+
+
 
 
 <style>
@@ -441,7 +624,12 @@ button:hover {
 
 }
 
-
+.btnlogin {
+    width: 100%;
+    background: linear-gradient(90deg, #f6d45d, #e3bc3b);
+    color: #111;
+    box-shadow: 0 0 30px rgba(255,213,79,.35);
+}
 
 /* Animación al cambiar de paso */
 
