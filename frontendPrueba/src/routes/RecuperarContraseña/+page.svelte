@@ -1,4 +1,6 @@
 <script lang="ts">
+    import StarsBackground from "$lib/components/StarsBackground.svelte";
+
 	let email = $state('');
 
 	function recoverPassword() {
@@ -9,8 +11,9 @@
 
 		alert(`Se enviará un enlace a ${email}`);
 	}
-</script>
 
+</script>
+<StarsBackground />
 <svelte:head>
 	<title>Recuperar contraseña</title>
 </svelte:head>

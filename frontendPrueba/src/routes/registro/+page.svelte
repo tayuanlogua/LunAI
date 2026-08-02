@@ -1,4 +1,6 @@
 <script lang="ts">
+    import StarsBackground from "$lib/components/StarsBackground.svelte";
+
     let step = $state(1);
 
     let form = {
@@ -170,6 +172,8 @@
     }
 </script>
 
+<StarsBackground />
+<div class ="main-container">
 
 <!-- Paso 1 - Crear cuenta -->
 {#if step === 1}
@@ -485,7 +489,7 @@
     </div>
 </div>
 {/if}
-
+</div>
 
 
 
@@ -496,6 +500,16 @@
 
 
 <style>
+.main-container {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
 :global(body) {
     margin: 0;
     min-height: 100vh;

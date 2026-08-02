@@ -1,5 +1,6 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
+    import StarsBackground from '$lib/components/StarsBackground.svelte';
    
     import logo from '$lib/img/lunaIA.png';
     import './login.css';
@@ -29,148 +30,101 @@
         goto('/RecuperarContraseña');
     }
 
-    const stars = Array.from({ length: 1000 }, () => {
-
-        const r = Math.random();
-
-        return {
-
-            left: Math.random() * 100,
-
-            top: Math.random() * 100,
-
-            size:
-
-                r < .75
-                    ? 'small'
-                    : r < .95
-                    ? 'medium'
-                    : 'big',
-
-            animation:
-
-                Math.random() < .65
-                    ? 'twinkle'
-                    : 'float',
-
-            duration:
-
-                Math.random() < .65
-                    ? `${2 + Math.random() * 4}s`
-                    : `${20 + Math.random() * 40}s`,
-
-            delay: `${Math.random() * 5}s`
-        };
-
-    });
+    function dashboard() {
+        goto('/DashboardUser');
+    }
 </script>
 
-<div class="background">
 
-    <div id="stars">
+<StarsBackground/>
+    <div class="login-container">
 
-      
+        <div class="logo">
 
-    </div>
-{#each stars as star}
-    <div
-        class={`star ${star.size} ${star.animation}`}
-        style:left={`${star.left}%`}
-        style:top={`${star.top}%`}
-        style:animation-duration={star.duration}
-        style:animation-delay={star.delay}
-    ></div>
-{/each}
-</div>
+            <img
+                src={logo}
+                alt="Logo">
 
-<div class="login-container">
+        </div>
 
-    <div class="logo">
+        <p class="subtitle">
 
-        <img
-            src={logo}
-            alt="Logo">
+            Conecta con tu ciclo. Transforma tu vida.
 
-    </div>
+        </p>
 
-    <p class="subtitle">
+        <div class="login-card">
 
-        Conecta con tu ciclo. Transforma tu vida.
+            <div class="input-group">
 
-    </p>
+                <i class="fa-solid fa-envelope"></i>
 
-    <div class="login-card">
+                <input
+
+                    bind:value={correo}
+
+                    type="email"
+
+                    placeholder="Correo electrónico">
+
+            </div>
 
         <div class="input-group">
 
-            <i class="fa-solid fa-envelope"></i>
+        <!-- Icono del candado -->
+        <i class="fa-solid fa-lock"></i>
 
-            <input
+        <!-- Input de contraseña -->
+        <input
+            bind:value={password}
+            type={mostrarPassword ? "text" : "password"}
+            placeholder="Contraseña">
 
-                bind:value={correo}
-
-                type="email"
-
-                placeholder="Correo electrónico">
-
-        </div>
-
-      <div class="input-group">
-
-    <!-- Icono del candado -->
-    <i class="fa-solid fa-lock"></i>
-
-    <!-- Input de contraseña -->
-    <input
-        bind:value={password}
-        type={mostrarPassword ? "text" : "password"}
-        placeholder="Contraseña">
-
-    <!-- Botón para mostrar/ocultar contraseña -->
-    <button
-        type="button"
-        class="eye-button"
-        aria-label={mostrarPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
-        onclick={() => mostrarPassword = !mostrarPassword}>
-        {#if mostrarPassword}
-            🙈
-        {:else}
-            👁️
-        {/if}
-    </button>
-
-  
-
-</div>
-
-        <div class="links">
-
-            <button
-                class="link"
-                onclick={recuperarPassword}>
-
-                ¿Olvidaste tu contraseña?
-
-            </button>
-
-            <button
-                class="link"
-                onclick={crearCuenta}>
-
-                Crear cuenta
-
-            </button>
-
-        </div>
-
+        <!-- Botón para mostrar/ocultar contraseña -->
         <button
-            class="loginButton"
-            onclick={login}>
-
-            Iniciar sesión
-
+            type="button"
+            class="eye-button"
+            aria-label={mostrarPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+            onclick={() => mostrarPassword = !mostrarPassword}>
+            {#if mostrarPassword}
+                🙈
+            {:else}
+                👁️
+            {/if}
         </button>
+
+    
 
     </div>
 
-</div>
+            <div class="links">
+
+                <button
+                    class="link"
+                    onclick={recuperarPassword}>
+
+                    ¿Olvidaste tu contraseña?
+
+                </button>
+
+                <button
+                    class="link"
+                    onclick={crearCuenta}>
+
+                    Crear cuenta
+
+                </button>
+
+            </div>
+
+            <button
+                class="loginButton"
+                onclick={dashboard}>
+
+                Iniciar sesión
+
+            </button>
+
+        </div>
+
+    </div>
