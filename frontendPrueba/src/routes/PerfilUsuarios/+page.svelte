@@ -4,7 +4,5 @@
 
 <h2>Aqui va lo del perfil del usuario </h2>
 $clinicalStore.sop
-
 $clinicalStore.endometriosis
-
 $clinicalStore.hashimoto
