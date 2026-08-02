@@ -6,54 +6,153 @@
         email: "",
         password: "",
         confirmPassword: "",
-        birthDate: "",
-
+        
         //2. Perfil
         nombre: "",
-        peso: "",
+        birthDate: "",
         edad: "",
+        peso: "",
         estatura: "",
+        cintura: "",
+        ocupacion: "",
+        horasSentada: "",
         actividad: "",
 
-        //3. Ciclo :)
-        primeraMenstruacion: "",
+        //3. Ciclo menstrual
+        fechaUltimaMenstruacion: "",
         ciclo: "",
+        variacionCicloDias: "",
         periodo: "",
         regular: "",
+        primeraMenstruacion: "",
+        menstruacionesUltimoAno: "",
+        ciclosAusentes: "",
+        ciclosAusentesMeses:"",
+        manchadoEntrePeriodos:"",
+        sangradoDespuesRelaciones:"",
+        
 
         // 4. Periodo :)s
         flujo: "",
         color: "",
         coagulos: "",
-        dolor: "",
+        cantidadToallasDia: "",
+        toallasNoche: "",
+        sangradoMayor7Dias: "",       
+        dolorEscala: "",   
         ubicacionDolor: "",
+        dolorAntesMenstruacionDias:"",
+        dolorOvulacion: "",
+        dolorDefecarMenstruacion: "",
+        dolorOrinarMenstruacion: "",
+        dolorIncapacitante: "",
+
 
         // 5. Sintomas frecuentes
-        acne: "",
-        caidaCabello: "",
-        VelloExcesivo: "",
-        AumentoPeso: "",
-        Fatiga: "",
-        Ansiedad: "",
+        fatiga: "",
+        somnolencia: "",
+        ansiedad: "",
         cambiosHumor: "",
-        DolorRelaciones: "",
+        insomnio: "",
+        migrañas: "",
+        aumentoPeso: "",
+        hambreConstante: "",
+        antojosAzucar: "",
+        distensionAbdominal: "",
+        estreñimiento: "",
+        diarrea: "",
+        palpitaciones: "",
+        temblores: "",
+        sudorExcesivo: "",
+        intoleranciaFrio: "",
+        intoleranciaCalor: "",
+        pielSeca: "",
+        pielGrasa: "",
+        unasFragiles: "",
+        vozRonca: "",
+        caidaCabello: "",
+        caidaCabelloMasculina: "",
+        disminucionLibido: "",
+        sequedadVaginal: "",
 
         // 6. Salud Ginecologica
         diagnosticosPrevios: "",
-        anticonceptivos: "",
-        tipoAnticonceptivo: "",
         embarazos: "",
         abortos: "",
+        abortosRecurrentes: "",
+        infertilidad: "",
+        tiempoBuscandoEmbarazo: "",
+        anticonceptivos: "",
+        tipoAnticonceptivo: "",
+        cirugiasPelvicas: "",
+        cesareas: "",
+        miomas: "",
+        quistesOvaricos: "",
+        
+        //7.antecedentes familiares
+        antecedentesSOP: "",
+        antecedentesEndometriosis: "",
+        antecedentesHipotiroidismo: "",
+        antecedentesHashimoto: "",
+        antecedentesDiabetes: "",
+        antecedentesCancerMama: "",
+        antecedentesCancerOvario: "",
+        
+        // 8. Alimentación
+        tipoDieta: "",
+        aguaDiaria: "",
+        consumoAzucar: "",
+        frutasSemana: "",
+        verdurasSemana: "",
+        refrescosSemana: "",
+        comidaRapidaSemana: "",
+        consumoCafe: "",
+        alcohol: "",
+        tabaco: "",
+        suplementos: "",
+        vitaminaD: "",
+        hierro: "",
+        omega3: "",
 
-        // 7. Alimentación
-        TipoDieta: "",
-        ConsumoAzucar: "",
-        AguaDiaria: "",
-
-        // 8. Estilo de vida
-        HorasSueño: "",
-        Estrés: "",
+        // 9. Estilo de vida
+        horasSueño: "",
+        calidadSueno: "",
+        estresEscala: "",
+        horasPantalla: "",
+        trabajoNocturno: "",
+        meditacion: "",
         ejercicioSemana: "",
+        ejercicioCardio: "",
+        ejercicioFuerza: "",
+        pasosDiarios: "",
+        
+
+        // 10. sop
+        acne: "",
+        acneAdulto: "",
+        velloExcesivo: "",
+        velloCara: "",
+        velloPecho: "",
+        velloAbdomen: "",
+        resistenciaInsulina: "",
+        acantosisNigricans: "",
+
+        // 11. Endometriosis
+        dolorRelaciones: "",
+        dolorPenetracion: "",
+        dolorDefecar: "",
+        dolorOrinar: "",
+        dolorLumbar: "",
+        dolorPiernas: "",
+        ausenciasTrabajo: "",
+        usoAnalgesicos: "",
+
+        // 12. evaluacion tiroides
+        bocio: "",
+        medicamentosTiroides: "",
+        diagnosticoHipotiroidismo: "",
+        diagnosticoHipertiroidismo: "",
+        diagnosticoHashimoto: ""
     };
 
     function siguiente() {
@@ -85,43 +184,51 @@
         type="password"
         bind:value={form.confirmPassword}
         placeholder="Confirmar contraseña">
-    <input
-        type="date"
-        bind:value={form.birthDate}>
-    <button onclick={siguiente}>
-        Crear cuenta
-    </button>
-    <a href="/login">
-		Volver a iniciar sesión
-	</a>
-</div>
-{/if}
+        <button onclick={siguiente}>
+            Crear cuenta
+        </button>
+        <a href="/login">
+            Volver a iniciar sesión
+        </a>
+    </div>
+    {/if}
+    
+    <!-- Paso 2 - Bienvenida -->
+    {#if step === 2}
+    <div class="card">
+        <h2>Bienvenida</h2>
+        
+        <input bind:value={form.nombre} placeholder="Nombre">
+        <input
+            type="date"
+            bind:value={form.birthDate}>
 
-<!-- Paso 2 - Bienvenida -->
-{#if step === 2}
-<div class="card">
+        <div class="row">
+            <input bind:value={form.peso} placeholder="Peso">
 
-<h2>Bienvenida</h2>
+            <input bind:value={form.edad} placeholder="Edad">
+        </div>
+        <div class="row">
+            <input bind:value={form.estatura} placeholder="Estatura">
+            <input bind:value={form.cintura} placeholder="Cintura">
+        </div>
 
-<input bind:value={form.nombre} placeholder="Nombre">
+        <input
+            bind:value={form.ocupacion}
+            placeholder="Ocupación">
 
-<div class="row">
-    <input bind:value={form.peso} placeholder="Peso">
+        <div class="row">
+            <input bind:value={form.horasSentada} placeholder="Horas sentada">
+            <select bind:value={form.actividad}>
+                <option value="">Nivel de actividad</option>
+                <option>Sedentaria</option>
+                <option>Ligera</option>
+                <option>Moderada</option>
+                <option>Alta</option>
+            </select>
+        </div>
+        
 
-    <input bind:value={form.edad} placeholder="Edad">
-</div>
-
-<input
-    bind:value={form.estatura}
-    placeholder="Estatura">
-
-<select bind:value={form.actividad}>
-    <option value="">Nivel de actividad</option>
-    <option>Sedentaria</option>
-    <option>Ligera</option>
-    <option>Moderada</option>
-    <option>Alta</option>
-</select>
 
 <div class="buttons">
     <button onclick={atras}>Atrás</button>
@@ -131,247 +238,259 @@
 
 </div>
 {/if}
+
 <!-- Paso 3 - Ciclo menstrual -->
 {#if step === 3}
 <div class="card">
-
-<h2>Tu ciclo menstrual</h2>
-
-<input
-    bind:value={form.primeraMenstruacion}
-    placeholder="Edad de primera menstruación">
-
-<input
-    bind:value={form.ciclo}
-    placeholder="Duración promedio del ciclo">
-
-<input
-    bind:value={form.periodo}
-    placeholder="Duración del periodo">
-
-<p>¿Es regular?</p>
-
-<label>
+    <h2>Ciclo menstrual</h2>
     <input
-        type="radio"
-        bind:group={form.regular}
-        value="Sí">
-    Sí
-</label>
+        type="date"
+        bind:value={form.fechaUltimaMenstruacion}
+        placeholder="Fecha de última menstruación">
 
-<label>
-    <input
-        type="radio"
-        bind:group={form.regular}
-        value="No">
-    No
-</label>
+    <div class="row">
+        <input bind:value={form.ciclo} placeholder="Duración del ciclo (días)">
+        <input bind:value={form.variacionCicloDias} placeholder="Variación del ciclo (días)">
+    </div>
 
-<div class="buttons">
-    <button onclick={atras}>Atrás</button>
+    <div class="row">
+        <input bind:value={form.periodo} placeholder="Duración del periodo (días)">
+        <select bind:value={form.regular}>
+            <option value="">¿Tu ciclo es regular?</option>
+            <option>Sí</option>
+            <option>No</option>
+        </select>
+    </div>
 
-    <button onclick={siguiente}>Siguiente</button>
+    <div class="row">
+        <input bind:value={form.primeraMenstruacion} placeholder="Edad de primera menstruación">
+        <input bind:value={form.menstruacionesUltimoAno} placeholder="Número de menstruaciones en el último año">
+    </div>  
+
+    <div class="row">
+        <input bind:value={form.ciclosAusentes} placeholder="¿Has tenido ciclos ausentes?">
+        <input bind:value={form.ciclosAusentesMeses} placeholder="Si es así, ¿cuántos meses?">  
+    </div>
+
+    <div class="row">
+        <input bind:value={form.manchadoEntrePeriodos} placeholder="¿Has tenido manchado entre periodos?">
+        <input bind:value={form.sangradoDespuesRelaciones} placeholder="¿Has tenido sangrado después de relaciones sexuales?">  
+    </div> 
+    
+    <div class="buttons">
+        <button onclick={atras}>Atrás</button>
+        <button onclick={siguiente}>Siguiente</button>
+    </div>
 </div>
 
-</div>
 {/if}
-<!-- Paso 4 - Sobre tu periodo -->
+
+<!-- Paso 4 - Periodo -->
 {#if step === 4}
 <div class="card">
-
-<h2>Sobre tu periodo</h2>
-
-<select bind:value={form.flujo}>
-    <option value="">Flujo</option>
-    <option>Ligero</option>
-    <option>Moderado</option>
-    <option>Abundante</option>
-</select>
-
-<select bind:value={form.color}>
-    <option value="">Color</option>
-    <option>Rojo</option>
-    <option>Oscuro</option>
-    <option>Marrón</option>
-</select>
-<select bind:value={form.coagulos}>
-    <option value="">Coágulos</option>
-    <option>si</option>
-    <option>No</option>
-</select>
-
-
-<select bind:value={form.dolor}>
-    <option value="">Dolor</option>
-    <option>Ninguno</option>
-    <option>Leve</option>
-    <option>Moderado</option>
-    <option>Severo</option>
-</select>
-
-<input
-    bind:value={form.ubicacionDolor}
-    placeholder="Ubicación del dolor">
-
-<div class="buttons">
-    <button onclick={atras}>Atrás</button>
-
-    <button onclick={siguiente}>
-        siguiente
-    </button>
-</div>
-
+    <h2>Periodo</h2>
+    <input bind:value={form.flujo} placeholder="Flujo">
+    <input bind:value={form.color} placeholder="Color del flujo">
+    <input bind:value={form.coagulos} placeholder="¿Tienes coágulos?">
+    <input bind:value={form.cantidadToallasDia} placeholder="Cantidad de toallas por día">
+    <input bind:value={form.toallasNoche} placeholder="Cantidad de toallas por noche">
+    <input bind:value={form.sangradoMayor7Dias} placeholder="¿Tu sangrado dura más de 7 días?">
+    <input bind:value={form.dolorEscala} placeholder="Dolor (escala del 1 al 10)">
+    <input bind:value={form.ubicacionDolor} placeholder="Ubicación del dolor">
+    <input bind:value={form.dolorAntesMenstruacionDias} placeholder="Dolor antes de la menstruación (días)">
+    <input bind:value={form.dolorOvulacion} placeholder="¿Tienes dolor durante la ovulación?">
+    <input bind:value={form.dolorDefecarMenstruacion} placeholder="¿Tienes dolor al defecar durante la menstruación?">
+    <input bind:value={form.dolorOrinarMenstruacion} placeholder="¿Tienes dolor al orinar durante la menstruación?">
+    <input bind:value={form.dolorIncapacitante} placeholder="¿El dolor es incapacitante?">
+    <div class="buttons">
+        <button onclick={atras}>Atrás</button>
+        <button onclick={siguiente}>Siguiente</button>
+    </div>
 </div>
 {/if}
 
 <!-- Paso 5 - Sintomas frecuentes -->
 {#if step === 5}
 <div class="card">
-<h2>Sintomas frecuentes</h2>
-<select bind:value={form.acne}>
-    <option value="">Acné</option>
-    <option>si</option>
-    <option>No</option>
-</select>
-
-<select bind:value={form.caidaCabello}>
-    <option value="">Caída de cabello</option>
-    <option>si</option>
-    <option>No</option>
-</select>
-
-<select bind:value={form.VelloExcesivo}>
-    <option value="">Vello excesivo</option>
-    <option>si</option>
-    <option>No</option>
-</select>
-
-<select bind:value={form.AumentoPeso}>
-    <option value="">Aumento de peso</option>
-    <option>si</option>
-    <option>No</option>
-</select>
-
-<select bind:value={form.Fatiga}>
-    <option value="">Fatiga</option>
-    <option>si</option>
-    <option>No</option>
-</select>
-
-<select bind:value={form.Ansiedad}>
-    <option value="">Ansiedad</option>
-    <option>si</option>
-    <option>No</option>
-</select>
-
-<select bind:value={form.cambiosHumor}>
-    <option value="">Cambios de humor</option>
-    <option>si</option>
-    <option>No</option>
-</select>
-
-<select bind:value={form.DolorRelaciones}>
-    <option value="">Dolor durante relaciones sexuales</option>
-    <option>si</option>
-    <option>No</option>
-</select>
-
-<div class="buttons">
-    <button onclick={atras}>Atrás</button>
-
-    <button onclick={siguiente}>Siguiente</button>
-</div>
+    <h2>Síntomas frecuentes</h2>
+    <input bind:value={form.fatiga} placeholder="Fatiga">
+    <input bind:value={form.somnolencia} placeholder="Somnolencia">
+    <input bind:value={form.ansiedad} placeholder="Ansiedad">
+    <input bind:value={form.cambiosHumor} placeholder="Cambios de humor">
+    <input bind:value={form.insomnio} placeholder="Insomnio">
+    <input bind:value={form.migrañas} placeholder="Migrañas">
+    <input bind:value={form.aumentoPeso} placeholder="Aumento de peso">
+    <input bind:value={form.hambreConstante} placeholder="Hambre constante">
+    <input bind:value={form.antojosAzucar} placeholder="Antojos de azúcar">
+    <input bind:value={form.distensionAbdominal} placeholder="Distensión abdominal">
+    <input bind:value={form.estreñimiento} placeholder="Estreñimiento">
+    <input bind:value={form.diarrea} placeholder="Diarrea">
+    <input bind:value={form.palpitaciones} placeholder="Palpitaciones">
+    <input bind:value={form.temblores} placeholder="Temblores">
+    <input bind:value={form.sudorExcesivo} placeholder="Sudor excesivo">
+    <input bind:value={form.intoleranciaFrio} placeholder="Intolerancia al frío">
+    <input bind:value={form.intoleranciaCalor} placeholder="Intolerancia al calor">
+    <input bind:value={form.pielSeca} placeholder="Piel seca">
+    <input bind:value={form.pielGrasa} placeholder="Piel grasa">
+    <input bind:value={form.unasFragiles} placeholder="Uñas frágiles">
+    <input bind:value={form.vozRonca} placeholder="Voz ronca">
+    <input bind:value={form.caidaCabello} placeholder="Caída de cabello">
+    <input bind:value={form.caidaCabelloMasculina} placeholder="Caída de cabello tipo masculina">
+    <input bind:value={form.disminucionLibido} placeholder="Disminución de libido">
+    <input bind:value={form.sequedadVaginal} placeholder="Sequedad vaginal">
+    <div class="buttons">
+        <button onclick={atras}>Atrás</button>
+        <button onclick={siguiente}>Siguiente</button>
+    </div>
 </div>
 {/if}
+
 <!-- Paso 6 - Salud Ginecologica -->
-{#if step === 6}
+{#if step === 6}    
 <div class="card">
-<h2>Salud Ginecologica</h2>
-<input bind:value={form.diagnosticosPrevios} placeholder="Diagnosticos previos">
-<select bind:value={form.anticonceptivos}>
-    <option value="">Anticonceptivos</option>
-    <option>si</option>
-    <option>No</option>
-</select>
-<input bind:value={form.tipoAnticonceptivo} placeholder="Tipo de anticonceptivo">
-<select bind:value={form.embarazos}>
-    <option value="">Embarazos</option>
-    <option>si</option>
-    <option>No</option>
-</select>
-<select bind:value={form.abortos}>
-    <option value="">Abortos</option>
-    <option>si</option>
-    <option>No</option>
-</select>
-
-<div class="buttons">
-    <button onclick={atras}>Atrás</button>
-
-    <button onclick={siguiente}>Siguiente</button>
-</div>
-
+    <h2>Salud Ginecológica</h2>
+    <input bind:value={form.diagnosticosPrevios} placeholder="Diagnósticos previos">
+    <input bind:value={form.embarazos} placeholder="Número de embarazos">
+    <input bind:value={form.abortos} placeholder="Número de abortos">
+    <input bind:value={form.abortosRecurrentes} placeholder="Abortos recurrentes">
+    <input bind:value={form.infertilidad} placeholder="Infertilidad">
+    <input bind:value={form.tiempoBuscandoEmbarazo} placeholder="Tiempo buscando embarazo (meses)">
+    <input bind:value={form.anticonceptivos} placeholder="Uso de anticonceptivos">
+    <input bind:value={form.tipoAnticonceptivo} placeholder="Tipo de anticonceptivo">
+    <input bind:value={form.cirugiasPelvicas} placeholder="Cirugías pélvicas">
+    <input bind:value={form.cesareas} placeholder="Número de cesáreas">
+    <input bind:value={form.miomas} placeholder="Miomas">
+    <input bind:value={form.quistesOvaricos} placeholder="Quistes ováricos">
+    <div class="buttons">
+        <button onclick={atras}>Atrás</button>
+        <button onclick={siguiente}>Siguiente</button>
+    </div>
 </div>
 {/if}
-<!-- Paso 7 - Alimentación -->
-{#if step === 7}
+
+<!-- Paso 7 - Antecedentes familiares -->
+{#if step === 7}    
 <div class="card">
-<h2>Alimentación</h2>
-
-<select bind:value={form.TipoDieta}>
-    <option value="">Tipo de dieta</option>
-    <option>Vegetariana</option>
-    <option>Vegana</option>
-    <option>Omnívora</option>
-    <option>keto</option>
-</select>
-
-<select bind:value={form.ConsumoAzucar}>
-    <option value="">Consumo de azúcar</option>
-    <option>Alto</option>
-    <option>Moderado</option>
-    <option>Bajo</option>
-</select>
-
-<input bind:value={form.AguaDiaria} placeholder="Agua diaria (litros)" />
-
-
-<div class="buttons">
-    <button onclick={atras}>Atrás</button>
-
-    <button onclick={siguiente}>Siguiente</button>
-</div>
-
+    <h2>Antecedentes familiares</h2>
+    <input bind:value={form.antecedentesSOP} placeholder="Síndrome de ovario poliquístico (SOP)">
+    <input bind:value={form.antecedentesEndometriosis} placeholder="Endometriosis">
+    <input bind:value={form.antecedentesHipotiroidismo} placeholder="Hipotiroidismo">
+    <input bind:value={form.antecedentesHashimoto} placeholder="Enfermedad de Hashimoto">
+    <input bind:value={form.antecedentesDiabetes} placeholder="Diabetes">
+    <input bind:value={form.antecedentesCancerMama} placeholder="Cáncer de mama">
+    <input bind:value={form.antecedentesCancerOvario} placeholder="Cáncer de ovario">
+    <div class="buttons">
+        <button onclick={atras}>Atrás</button>
+        <button onclick={siguiente}>Siguiente</button>
+    </div>
 </div>
 {/if}
-<!-- Paso 8 - Estilo de vida -->
+
+<!-- Paso 8 - Alimentación -->
 {#if step === 8}
 <div class="card">
-<h2>Estilo de vida</h2>
-
-<input bind:value={form.HorasSueño} 
-placeholder="Horas de sueño">
-
-<select bind:value={form.Estrés}>
-    <option value="">Nivel de estrés</option>
-    <option>Bajo</option>
-    <option>Moderado</option>
-    <option>Alto</option>
-</select>
-
-<input
-    bind:value={form.ejercicioSemana}
-    placeholder="Ejercicio por semana (veces)">
-
-
-<div class="buttons">
-    <button onclick={atras}>Atrás</button>
-
-    <button onclick={finalizar}>Finalizar</button>
-</div>
-
+    <h2>Alimentación</h2>
+    <input bind:value={form.tipoDieta} placeholder="Tipo de dieta">
+    <input bind:value={form.aguaDiaria} placeholder="Cantidad de agua diaria (litros)">
+    <input bind:value={form.consumoAzucar} placeholder="Consumo de azúcar (veces por semana)">
+    <input bind:value={form.frutasSemana} placeholder="Frutas por semana">
+    <input bind:value={form.verdurasSemana} placeholder="Verduras por semana">
+    <input bind:value={form.refrescosSemana} placeholder="Refrescos por semana">
+    <input bind:value={form.comidaRapidaSemana} placeholder="Comida rápida por semana">
+    <input bind:value={form.consumoCafe} placeholder="Consumo de café (tazas por día)">
+    <input bind:value={form.alcohol} placeholder="Consumo de alcohol (veces por semana)">
+    <input bind:value={form.tabaco} placeholder="Consumo de tabaco (veces por semana)">
+    <input bind:value={form.suplementos} placeholder="Suplementos que tomas">
+    <input bind:value={form.vitaminaD} placeholder="Vitamina D (UI/día)">
+    <input bind:value={form.hierro} placeholder="Hierro (mg/día)">
+    <input bind:value={form.omega3} placeholder="Omega-3 (mg/día)">
+    <div class="buttons">
+        <button onclick={atras}>Atrás</button>
+        <button onclick={siguiente}>Siguiente</button>
+    </div>
 </div>
 {/if}
+
+<!-- Paso 9 - Estilo de vida -->
+{#if step === 9}
+<div class="card">
+    <h2>Estilo de vida</h2>
+    <input bind:value={form.horasSueño} placeholder="Horas de sueño por noche">
+    <input bind:value={form.calidadSueno} placeholder="Calidad del sueño (1-10)">
+    <input bind:value={form.estresEscala} placeholder="Nivel de estrés (1-10)">
+    <input bind:value={form.horasPantalla} placeholder="Horas frente a pantallas por día">
+    <input bind:value={form.trabajoNocturno} placeholder="¿Trabajas de noche?">
+    <input bind:value={form.meditacion} placeholder="¿Meditas regularmente?">
+    <input bind:value={form.ejercicioSemana} placeholder="Días de ejercicio por semana">
+    <input bind:value={form.ejercicioCardio} placeholder="Días de ejercicio cardiovascular por semana">
+    <input bind:value={form.ejercicioFuerza} placeholder="Días de entrenamiento de fuerza por semana">
+    <input bind:value={form.pasosDiarios} placeholder="Promedio de pasos diarios">
+    <div class="buttons">
+        <button onclick={atras}>Atrás</button>
+        <button onclick={siguiente}>Siguiente</button>
+    </div>
+</div>
+{/if}
+
+<!-- Paso 10 - SOP -->
+{#if step === 10}
+<div class="card">
+    <h2>Síndrome de Ovario Poliquístico (SOP)</h2>
+    <input bind:value={form.acne} placeholder="Acné">
+    <input bind:value={form.acneAdulto} placeholder="Acné en edad adulta">
+    <input bind:value={form.velloExcesivo} placeholder="Vello excesivo">
+    <input bind:value={form.velloCara} placeholder="Vello en la cara">
+    <input bind:value={form.velloPecho} placeholder="Vello en el pecho">
+    <input bind:value={form.velloAbdomen} placeholder="Vello en el abdomen">
+    <input bind:value={form.resistenciaInsulina} placeholder="Resistencia a la insulina">
+    <input bind:value={form.acantosisNigricans} placeholder="Acantosis nigricans">
+    <div class="buttons">
+        <button onclick={atras}>Atrás</button>
+        <button onclick={siguiente}>Siguiente</button>
+    </div>
+</div>
+{/if}
+
+<!-- Paso 11 - Endometriosis -->
+{#if step === 11}
+<div class="card">
+    <h2>Endometriosis</h2>
+    <input bind:value={form.dolorRelaciones} placeholder="Dolor durante relaciones sexuales">
+    <input bind:value={form.dolorPenetracion} placeholder="Dolor durante la penetración">
+    <input bind:value={form.dolorDefecar} placeholder="Dolor al defecar">
+    <input bind:value={form.dolorOrinar} placeholder="Dolor al orinar">
+    <input bind:value={form.dolorLumbar} placeholder="Dolor lumbar">
+    <input bind:value={form.dolorPiernas} placeholder="Dolor en las piernas">
+    <input bind:value={form.ausenciasTrabajo} placeholder="Ausencias en el trabajo por dolor">
+    <input bind:value={form.usoAnalgesicos} placeholder="Uso de analgésicos para el dolor">
+    <div class="buttons">
+        <button onclick={atras}>Atrás</button>
+        <button onclick={siguiente}>Siguiente</button>
+    </div>
+</div>
+{/if}   
+
+<!-- Paso 12 - Evaluación de tiroides -->
+{#if step === 12}
+<div class="card">
+    <h2>Evaluación de tiroides</h2>
+    <input bind:value={form.bocio} placeholder="Bocio">
+    <input bind:value={form.medicamentosTiroides} placeholder="Uso de medicamentos para la tiroides">
+    <input bind:value={form.diagnosticoHipotiroidismo} placeholder="Diagnóstico de hipotiroidismo">
+    <input bind:value={form.diagnosticoHipertiroidismo} placeholder="Diagnóstico de hipertiroidismo">
+    <input bind:value={form.diagnosticoHashimoto} placeholder="Diagnóstico de Hashimoto">
+    <div class="buttons">
+        <button onclick={atras}>Atrás</button>
+        <button onclick={finalizar}>Finalizar</button>
+    </div>
+</div>
+{/if}
+
+
+
+
+
+
 
 
 
@@ -527,36 +646,6 @@ select {
 .row input {
 
     width:50%;
-
-}
-
-
-/* Radio */
-
-label {
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    margin-right:15px;
-
-    color:#ddd;
-
-    font-size:14px;
-
-}
-
-
-input[type="radio"] {
-
-    width:auto;
-
-    height:auto;
-
-    accent-color:#ffd700;
 
 }
 
