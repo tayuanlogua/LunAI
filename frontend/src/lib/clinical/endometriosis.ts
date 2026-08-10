@@ -3,25 +3,17 @@ import type { ResultadoClinico } from "./interfaces";
 export function calcularEndometriosis(form: any): ResultadoClinico {
 
     let puntos = 0;
-
     const factores: string[] = [];
-
     const recomendaciones: string[] = [];
-
     const estudios: string[] = [];
-
     //----------------------------------------
     // Dolor incapacitante
     //----------------------------------------
-
     if (form.dolorIncapacitante === "Sí") {
-
         puntos += 30;
-
         factores.push(
             "Dolor menstrual incapacitante."
         );
-
     }
 
     //----------------------------------------
@@ -31,17 +23,13 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     const dolor = Number(form.dolorEscala);
 
     if (dolor >= 9) {
-
         puntos += 25;
-
         factores.push(
             "Dolor intenso (9-10/10)."
         );
-
     }
 
     else if (dolor >= 7) {
-
         puntos += 20;
 
         factores.push(
@@ -51,13 +39,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     }
 
     else if (dolor >= 5) {
-
         puntos += 10;
-
         factores.push(
             "Dolor moderado."
         );
-
     }
 
     //----------------------------------------
@@ -69,13 +54,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     );
 
     if (dias >= 3) {
-
         puntos += 10;
-
         factores.push(
             "Dolor inicia varios días antes del periodo."
         );
-
     }
 
     //----------------------------------------
@@ -83,13 +65,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.dolorOvulacion === "Sí") {
-
         puntos += 10;
-
         factores.push(
             "Dolor durante la ovulación."
         );
-
     }
 
     //----------------------------------------
@@ -97,19 +76,14 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.dolorRelaciones === "Sí") {
-
         puntos += 20;
-
         factores.push(
             "Dolor durante relaciones sexuales."
         );
-
     }
 
     if (form.dolorPenetracion === "Sí") {
-
         puntos += 15;
-
         factores.push(
             "Dolor con penetración profunda."
         );
@@ -124,9 +98,7 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
         form.dolorDefecar === "Sí" ||
         form.dolorDefecarMenstruacion === "Sí"
     ) {
-
         puntos += 20;
-
         factores.push(
             "Dolor al evacuar durante la menstruación."
         );
@@ -143,7 +115,6 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     ) {
 
         puntos += 15;
-
         factores.push(
             "Dolor al orinar durante la menstruación."
         );
@@ -155,13 +126,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.dolorLumbar === "Sí") {
-
         puntos += 10;
-
         factores.push(
             "Dolor lumbar."
         );
-
     }
 
     //----------------------------------------
@@ -169,13 +137,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.dolorPiernas === "Sí") {
-
         puntos += 10;
-
         factores.push(
             "Dolor irradiado hacia piernas."
         );
-
     }
 
     //----------------------------------------
@@ -183,13 +148,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.flujo === "Abundante") {
-
         puntos += 10;
-
         factores.push(
             "Flujo menstrual abundante."
         );
-
     }
 
     //----------------------------------------
@@ -197,13 +159,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.sangradoMayor7Dias === "Sí") {
-
         puntos += 15;
-
         factores.push(
             "Menstruaciones mayores de siete días."
         );
-
     }
 
     //----------------------------------------
@@ -211,13 +170,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.coagulos === "Sí") {
-
         puntos += 8;
-
         factores.push(
             "Presencia de coágulos."
         );
-
     }
 
         //----------------------------------------
@@ -225,13 +181,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.manchadoEntrePeriodos === "Sí") {
-
         puntos += 10;
-
         factores.push(
             "Manchado entre periodos."
         );
-
     }
 
     //----------------------------------------
@@ -239,13 +192,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.sangradoDespuesRelaciones === "Sí") {
-
         puntos += 10;
-
         factores.push(
             "Sangrado después de relaciones sexuales."
         );
-
     }
 
     //----------------------------------------
@@ -253,13 +203,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.infertilidad === "Sí") {
-
         puntos += 20;
-
         factores.push(
             "Antecedente de infertilidad."
         );
-
     }
 
     //----------------------------------------
@@ -267,15 +214,11 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     const meses = Number(form.tiempoBuscandoEmbarazo);
-
     if (meses >= 12) {
-
         puntos += 15;
-
         factores.push(
             "Más de un año intentando embarazo."
         );
-
     }
 
     //----------------------------------------
@@ -283,13 +226,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.abortosRecurrentes === "Sí") {
-
         puntos += 10;
-
         factores.push(
             "Antecedente de abortos recurrentes."
         );
-
     }
 
     //----------------------------------------
@@ -297,13 +237,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.miomas === "Sí") {
-
         puntos += 8;
-
         factores.push(
             "Antecedente de miomas uterinos."
         );
-
     }
 
     //----------------------------------------
@@ -311,13 +248,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.quistesOvaricos === "Sí") {
-
         puntos += 8;
-
         factores.push(
             "Antecedente de quistes ováricos."
         );
-
     }
 
     //----------------------------------------
@@ -325,13 +259,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.cirugiasPelvicas === "Sí") {
-
         puntos += 8;
-
         factores.push(
             "Cirugías pélvicas previas."
         );
-
     }
 
     //----------------------------------------
@@ -339,13 +270,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.cesareas === "Sí") {
-
         puntos += 3;
-
         factores.push(
             "Antecedente de cesárea."
         );
-
     }
 
     //----------------------------------------
@@ -353,13 +281,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.antecedentesEndometriosis === "Sí") {
-
         puntos += 25;
-
         factores.push(
             "Antecedentes familiares de endometriosis."
         );
-
     }
 
     //----------------------------------------
@@ -367,13 +292,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.usoAnalgesicos === "Sí") {
-
         puntos += 12;
-
         factores.push(
             "Uso frecuente de analgésicos por dolor menstrual."
         );
-
     }
 
     //----------------------------------------
@@ -381,13 +303,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.ausenciasTrabajo === "Sí") {
-
         puntos += 15;
-
         factores.push(
             "Ausencias laborales o escolares por dolor."
         );
-
     }
 
     //----------------------------------------
@@ -395,13 +314,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.distensionAbdominal === "Sí") {
-
         puntos += 5;
-
         factores.push(
             "Distensión abdominal frecuente."
         );
-
     }
 
     //----------------------------------------
@@ -409,9 +325,7 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.diarrea === "Sí") {
-
         puntos += 5;
-
         factores.push(
             "Diarrea durante el periodo menstrual."
         );
@@ -423,13 +337,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.estreñimiento === "Sí") {
-
         puntos += 5;
-
         factores.push(
             "Estreñimiento asociado al ciclo."
         );
-
     }
 
     //----------------------------------------
@@ -437,13 +348,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.fatiga === "Sí") {
-
         puntos += 5;
-
         factores.push(
             "Fatiga persistente."
         );
-
     }
 
     //----------------------------------------
@@ -451,13 +359,10 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     if (form.ansiedad === "Sí") {
-
         puntos += 3;
-
         factores.push(
             "Ansiedad relacionada con el dolor."
         );
-
     }
 
     //----------------------------------------
@@ -465,7 +370,6 @@ export function calcularEndometriosis(form: any): ResultadoClinico {
     //----------------------------------------
 
     const puntuacionMaxima = 300;
-
     //----------------------------------------
     // Porcentaje
     //----------------------------------------

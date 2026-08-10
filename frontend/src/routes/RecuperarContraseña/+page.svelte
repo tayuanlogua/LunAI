@@ -1,7 +1,6 @@
 <script lang="ts">
-    import StarsBackground from "$lib/components/StarsBackground.svelte";
-
-	let email = $state('');
+   
+   let email = $state('');
 
 	function recoverPassword() {
 		if (!email.trim()) {
@@ -13,10 +12,10 @@
 	}
 
 </script>
-<StarsBackground />
 <svelte:head>
 	<title>Recuperar contraseña</title>
 </svelte:head>
+
 
 <div class="page">
 

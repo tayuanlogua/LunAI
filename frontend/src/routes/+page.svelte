@@ -1,9 +1,8 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
-    import StarsBackground from '$lib/components/StarsBackground.svelte';
-   
     import logo from '$lib/img/lunaIA.png';
     import './login.css';
+    import StartsBackground from '$lib/components/StartsBackground.svelte';
 
     let correo = $state('');
     let password = $state('');
@@ -36,7 +35,7 @@
 </script>
 
 
-<StarsBackground/>
+<StartsBackground/>
     <div class="login-container">
 
         <div class="logo">

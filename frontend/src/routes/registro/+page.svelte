@@ -1,5 +1,4 @@
 <script lang="ts">
-    import StarsBackground from "$lib/components/StarsBackground.svelte";
 
     let step = $state(1);
 
@@ -168,11 +167,11 @@
     function finalizar() {
         console.log(form);
         // Aquí puedes enviar los datos a tu API
-        location.href = "/login"; // Redirige a la página de inicio de sesión después de finalizar
+        location.href = "/"; // Redirige a la página de inicio de sesión después de finalizar
     }
 </script>
 
-<StarsBackground />
+
 <div class ="main-container">
 
 <!-- Paso 1 - Crear cuenta -->
