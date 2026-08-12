@@ -2,10 +2,12 @@
     import { clinical } from "$lib/stores/clinical.store.svelte";
     import Header from "$lib/components/layout/Header.svelte";
     import RiskCard from "$lib/components/layout/RiskCard.svelte";
+    import AgentChat from '$lib/components/AgentChat.svelte';
+    import StartsBackground from "$lib/components/StartsBackground.svelte";
 </script>
-
+<StartsBackground/>
 <Header
-    titulo="Dashboard"
+    titulo="Dashboard 🌙"
     subtitulo="Bienvenida nuevamente a LunAI"
 />
 
@@ -32,5 +34,11 @@
 {#if clinical.hashimoto}
     <RiskCard resultado={clinical.hashimoto} />
 {/if}
+
+<AgentChat
+			apiEndpoint="/api/agent/chat"
+			title="LunAI"
+			subtitle="Tu compañera inteligente"
+		/>
 
 </div>
