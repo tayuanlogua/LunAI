@@ -5,6 +5,13 @@ export interface ResultadoClinico {
     enfermedad: string;
     porcentaje: number;
     gravedad: "Normal" | "Precaución" | "Moderado" | "Alto" | "Muy Alto";
+    prioridad:
+     | "Baja"
+        | "Media"
+        | "Alta"
+        | "Urgente";
+
+    requiereEspecialista: boolean;
     color: string;
     puntuacion: number;
     puntuacionMaxima: number;
@@ -185,49 +192,59 @@ export function calcularSOP(form: any): ResultadoClinico {
     //----------------------------------------
     // Máximo
     //----------------------------------------
-
+    
     const puntuacionMaxima = 225;
     const porcentaje = Math.round(
         (puntos / puntuacionMaxima) * 100
     );
-
+    
     //----------------------------------------
     // Gravedad
     //----------------------------------------
-
+    
     let gravedad:
-        | "Normal"
-        | "Precaución"
-        | "Moderado"
-        | "Alto"
-        | "Muy Alto";
+    | "Normal"
+    | "Precaución"
+    | "Moderado"
+    | "Alto"
+    | "Muy Alto";
     let color = "";
-
+    
+    let prioridad: "Baja" | "Media" | "Alta" | "Urgente" = "Baja";
+    
+    let requiereEspecialista = false;
+    
     if (porcentaje <= 20) {
         gravedad = "Normal";
         color = "#4CAF50";
+        prioridad = "Baja";
     }
 
     else if (porcentaje <= 40) {
         gravedad = "Precaución";
         color = "#FFD54F";
+        prioridad = "Media";
     }
 
     else if (porcentaje <= 60) {
         gravedad = "Moderado";
         color = "#FB8C00";
+        prioridad = "Alta";
     }
 
     else if (porcentaje <= 80) {
         gravedad = "Alto";
         color = "#E53935";
+        prioridad = "Urgente";
     }
 
     else {
         gravedad = "Muy Alto";
         color = "#8E24AA";
+        prioridad = "Urgente";
+        requiereEspecialista = true;
     }
-
+    
     //----------------------------------------
     // Recomendaciones
     //----------------------------------------
@@ -254,7 +271,7 @@ export function calcularSOP(form: any): ResultadoClinico {
         );
 
     }
-
+    //---------------------------------
     //----------------------------------------
     // Estudios sugeridos
     //----------------------------------------
@@ -286,6 +303,8 @@ export function calcularSOP(form: any): ResultadoClinico {
         enfermedad: "Síndrome de Ovario Poliquístico",
         porcentaje,
         gravedad,
+        prioridad,
+        requiereEspecialista,
         color,
         puntuacion: puntos,
         puntuacionMaxima,
@@ -298,8 +317,8 @@ export function calcularSOP(form: any): ResultadoClinico {
         estudiosSugeridos: estudios,
 
         descripcion:
-            "Este resultado representa una estimación del riesgo basada en las respuestas del formulario y no constituye un diagnóstico médico."
-
+            "Este resultado representa una estimación del riesgo basada en las respuestas del formulario y no constituye un diagnóstico médico.",
+       
     };
 
 }

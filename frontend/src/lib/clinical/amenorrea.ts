@@ -56,6 +56,13 @@ export function calcularAmenorrea(form: any): ResultadoClinico {
         );
     }
 
+    else if (ciclos == 12){
+        puntos += 0;
+        factores.push(
+            "Metruaciones regulares a lo largo del año"
+        );
+    }
+
     //----------------------------------------
     // Ciclos largos
     //----------------------------------------
@@ -339,6 +346,8 @@ export function calcularAmenorrea(form: any): ResultadoClinico {
         );
     }
 
+
+    //************************************************************************************************************************************************ */
     //----------------------------------------
     // Máximo de puntos
     //----------------------------------------

@@ -1,8 +1,10 @@
 <script lang="ts">
+    import { calcularTodo } from "$lib/clinical/scoreEngine";
+    import { clinical } from "$lib/stores/clinical.store.svelte";
 
     let step = $state(1);
 
-    let form = {
+    let form = $state({
         //1. Cuenta
         email: "",
         password: "",
@@ -154,7 +156,7 @@
         diagnosticoHipotiroidismo: "",
         diagnosticoHipertiroidismo: "",
         diagnosticoHashimoto: ""
-    };
+    });
 
     function siguiente() {
         step++;
@@ -165,10 +167,23 @@
     }
 
     function finalizar() {
+        console.log("DATOS DEL FORMULARIO:");
         console.log(form);
+        const resultados = calcularTodo(form);
+        
+        clinical.sop = resultados.sop;
+        clinical.endometriosis = resultados.endometriosis;
+        clinical.amenorrea = resultados.amenorrea;
+        clinical.hipotiroidismo = resultados.hipotiroidismo;
+        clinical.hipertiroidismo = resultados.hipertiroidismo;
+        clinical.hashimoto = resultados.hashimoto;
+        console.log("Resultados guardados:", clinical);
+        location.href = "/DashboardUser";
+
         // Aquí puedes enviar los datos a tu API
-        location.href = "/"; // Redirige a la página de inicio de sesión después de finalizar
+        //location.href = "/"; // Redirige a la página de inicio de sesión después de finalizar
     }
+
 </script>
 
 
@@ -196,24 +211,33 @@
     </div>
     {/if}
     
-    <!-- Paso 2 - Bienvenida -->
-    {#if step === 2}
+<!-- Paso 2 - Bienvenida -->
+{#if step === 2}
     <div class="card">
         <h2>Bienvenida</h2>
         
-        <input bind:value={form.nombre} placeholder="Nombre">
+        <input bind:value={form.nombre} placeholder="Nombre o alias">
+        <p> 🎂 Fecha de cumpleaños</p>
         <input
             type="date"
             bind:value={form.birthDate}>
 
         <div class="row">
-            <input bind:value={form.peso} placeholder="Peso">
-
-            <input bind:value={form.edad} placeholder="Edad">
+            <input 
+            maxLength="3"
+            bind:value={form.peso} placeholder="Peso">
+            
+            <input 
+            maxLength="3"
+            bind:value={form.edad} placeholder="Edad">
         </div>
         <div class="row">
-            <input bind:value={form.estatura} placeholder="Estatura">
-            <input bind:value={form.cintura} placeholder="Cintura">
+            <input 
+            maxLength="3"
+            bind:value={form.estatura} placeholder="Estatura">
+            <input
+            maxLength="3"
+            bind:value={form.cintura} placeholder="Cintura">
         </div>
 
         <input
@@ -221,7 +245,10 @@
             placeholder="Ocupación">
 
         <div class="row">
-            <input bind:value={form.horasSentada} placeholder="Horas sentada">
+            <input 
+            type="number"
+            maxLength="2"
+            bind:value={form.horasSentada} placeholder="Horas sentada">
             <select bind:value={form.actividad}>
                 <option value="">Nivel de actividad</option>
                 <option>Sedentaria</option>
@@ -246,38 +273,93 @@
 {#if step === 3}
 <div class="card">
     <h2>Ciclo menstrual</h2>
+    <p>Última fecha de mestruación</p>
     <input
         type="date"
         bind:value={form.fechaUltimaMenstruacion}
         placeholder="Fecha de última menstruación">
 
     <div class="row">
-        <input bind:value={form.ciclo} placeholder="Duración del ciclo (días)">
-        <input bind:value={form.variacionCicloDias} placeholder="Variación del ciclo (días)">
-    </div>
-
-    <div class="row">
-        <input bind:value={form.periodo} placeholder="Duración del periodo (días)">
+        <select bind:value={form.ciclo}>
+            <option value="">Duración del ciclo (días)</option>
+            <option value="20">menos de 21 dias</option>
+            <option value="28">entre 21 a 35 días</option>
+            <option value="45">más de 45 días</option>
+        </select>
+          <select bind:value={form.periodo}>
+            <option value=""> Duración del perio en días</option>
+            <option value="2">menos de 3 días</option>
+            <option value="3">entre 3 a 9 días</option>
+            <option value="10">más de 9 días</option>
+        </select>
+</div>
+<div class="row">
         <select bind:value={form.regular}>
             <option value="">¿Tu ciclo es regular?</option>
-            <option>Sí</option>
-            <option>No</option>
+            <option value="si">Sí</option>
+            <option value="no">No</option>
         </select>
     </div>
 
     <div class="row">
-        <input bind:value={form.primeraMenstruacion} placeholder="Edad de primera menstruación">
-        <input bind:value={form.menstruacionesUltimoAno} placeholder="Número de menstruaciones en el último año">
+        <select bind:value={form.primeraMenstruacion}>
+            <option value="">Edad primera mestruación</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+        </select>
+        
+        <select 
+            bind:value={form.menstruacionesUltimoAno}>
+            <option value="">Número de mestruaciones al año</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+
+        </select>
     </div>  
 
     <div class="row">
-        <input bind:value={form.ciclosAusentes} placeholder="¿Has tenido ciclos ausentes?">
-        <input bind:value={form.ciclosAusentesMeses} placeholder="Si es así, ¿cuántos meses?">  
+        <select bind:value={form.ciclosAusentes} 
+             placeholder="¿Has tenido ciclos ausentes?">
+            <option value="">¿Has tenido ciclos ausentes?</option>
+            <option value="si">Sí</option>
+            <option value="No">No</option>
+        </select>
+
+        <select 
+            disabled={form.ciclosAusentes !== 'si'}
+            bind:value={form.ciclosAusentesMeses} placeholder="Si es así, ¿cuántos meses?">  
+            <option value="">Seleccione</option>
+            <option value="1-3 meses">1-3 meses</option>
+            <option value="4-6 meses">4-6 meses</option>
+            <option value="Más de 6 meses">Más de 6 meses</option>
+        </select>
     </div>
 
     <div class="row">
-        <input bind:value={form.manchadoEntrePeriodos} placeholder="¿Has tenido manchado entre periodos?">
-        <input bind:value={form.sangradoDespuesRelaciones} placeholder="¿Has tenido sangrado después de relaciones sexuales?">  
+        <select bind:value={form.manchadoEntrePeriodos}>
+            <option value="">¿Has tenido manchados entre periodos?</option>
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+        </select>
+        <select bind:value={form.sangradoDespuesRelaciones}>
+            <option value="">¿Has tenido sangrado después de relaciones sexuales?</option>
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+        </select>  
     </div> 
     
     <div class="buttons">
