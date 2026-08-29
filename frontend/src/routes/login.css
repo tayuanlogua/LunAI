@@ -1,0 +1,393 @@
+:global(body) {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #000;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+/* ===========================
+   Fondo
+=========================== */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+
+    background:
+        radial-gradient(circle at center,
+            #111 0%,
+            #070707 55%,
+            #000 100%);
+}
+
+#stars {
+    position: absolute;
+    inset: 0;
+}
+
+/* ===========================
+   Estrellas
+=========================== */
+
+.star {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+
+    box-shadow:
+        0 0 4px white,
+        0 0 10px #ffd54f;
+}
+
+.small {
+    width: 2px;
+    height: 2px;
+}
+
+.medium {
+    width: 3px;
+    height: 3px;
+}
+
+.big {
+    width: 5px;
+    height: 5px;
+}
+
+.twinkle {
+    animation: twinkle ease-in-out infinite;
+}
+
+.float {
+    animation: floatStar linear infinite;
+}
+
+@keyframes twinkle {
+
+    0% {
+        opacity: .15;
+        transform: scale(.6);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.7);
+    }
+
+    100% {
+        opacity: .15;
+        transform: scale(.6);
+    }
+
+}
+
+@keyframes floatStar {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-45px);
+    }
+
+}
+
+/* ===========================
+   Login
+=========================== */
+
+.login-container {
+
+    position: relative;
+    z-index: 5;
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===========================
+   Logo
+=========================== */
+
+.logo {
+
+    margin-bottom: 15px;
+}
+
+.logo img {
+
+    width: 220px;
+}
+
+.subtitle {
+
+    color: white;
+
+    font-size: 17px;
+
+    margin-bottom: 25px;
+
+    text-align: center;
+}
+
+/* ===========================
+   Card
+=========================== */
+
+.login-card {
+
+    width: 390px;
+
+    padding: 32px;
+
+    border-radius: 22px;
+
+    background: rgba(20,20,20,.88);
+
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(212,175,55,.25);
+
+    box-shadow:
+
+        0 0 35px rgba(212,175,55,.20),
+
+        0 0 80px rgba(212,175,55,.08);
+
+}
+
+/* ===========================
+   Inputs
+=========================== */
+
+.input-group {
+
+    position: relative;
+
+    margin-bottom: 18px;
+}
+
+.input-group input {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 15px 48px;
+
+    border-radius: 12px;
+
+    border: none;
+
+    outline: none;
+
+    font-size: 15px;
+
+    transition: .25s;
+}
+
+.input-group input:focus {
+
+    box-shadow:
+
+        0 0 0 2px #d7b15b,
+
+        0 0 18px rgba(215,177,91,.35);
+
+}
+.eye-button{
+
+    position:absolute;
+
+    right:15px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    background:none;
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:0;
+
+    width:24px;
+    height:24px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#777;
+}
+
+.eye-button:hover{
+
+    color:#d7b15b;
+}
+
+.eye-button i{
+
+    font-size:16px;
+}
+
+/* Icono izquierdo */
+
+.input-group>.fa-envelope,
+.input-group>.fa-lock {
+
+    position: absolute;
+
+    left: 16px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #777;
+}
+
+/* Botón del ojo */
+
+.eye-button {
+
+    position: absolute;
+
+    right: 15px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    color: #777;
+
+    padding: 0;
+
+    font-size: 17px;
+
+    width: 24px;
+    height: 24px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.eye-button:hover {
+
+    color: #d7b15b;
+}
+
+/* ===========================
+   Links
+=========================== */
+
+.links {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+}
+
+.link {
+
+    background: transparent;
+
+    border: none;
+
+    color: #d7b15b;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    padding: 0;
+}
+
+.link:hover {
+
+    text-decoration: underline;
+}
+
+/* ===========================
+   Botón Login
+=========================== */
+
+.loginButton {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 40px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    background: linear-gradient(
+        135deg,
+        #ffd84f,
+        #d7b15b
+    );
+
+    color: black;
+
+    transition: .25s;
+}
+
+.loginButton:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+
+        0 0 20px rgba(255,209,0,.45);
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width:480px) {
+
+    .login-card {
+
+        width: 90vw;
+
+        padding: 25px;
+    }
+
+    .logo img {
+
+        width: 180px;
+    }
+
+}
