@@ -8,17 +8,38 @@
     let password = $state('');
     let mostrarPassword = $state(false);
 
-    function login() {
-
-        if (!correo || !password) {
-
+    async function login() {
+        if (!correo.trim() || !password) {
             alert('Completa todos los campos');
             return;
         }
 
-        alert('Inicio de sesión');
+        try {
+            const respuesta = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    correo: correo.trim(),
+                    contrasena: password
+                })
+            });
 
-        // goto('/dashboard');
+            const datos = await respuesta.json();
+
+            if (!respuesta.ok) {
+                alert(datos.message || 'Correo o contraseña incorrectos');
+                return;
+            }
+
+            localStorage.setItem('token', datos.token);
+            localStorage.setItem('usuario', JSON.stringify(datos.usuario));
+            await goto('/DashboardUser');
+        } catch (error) {
+            console.error(error);
+            alert('No fue posible conectar con el servidor');
+        }
     }
 
     function crearCuenta() {
@@ -29,9 +50,6 @@
         goto('/RecuperarContraseña');
     }
 
-    function dashboard() {
-        goto('/DashboardUser');
-    }
 </script>
 
 
@@ -118,7 +136,7 @@
 
             <button
                 class="loginButton"
-                onclick={dashboard}>
+                onclick={login}>
 
                 Iniciar sesión
 
