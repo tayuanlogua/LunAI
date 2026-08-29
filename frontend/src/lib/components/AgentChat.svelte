@@ -1,5 +1,6 @@
 <script lang="ts">
-	import CatMascot from './CatMascot.svelte';
+	import { untrack } from 'svelte';
+import CatMascot from './CatMascot.svelte';
 
 	type Role = 'user' | 'assistant';
 
@@ -31,7 +32,7 @@
 		{
 			id: crypto.randomUUID(),
 			role: 'assistant',
-			content: greeting
+			content: untrack(() => greeting)
 		}
 	]);
 

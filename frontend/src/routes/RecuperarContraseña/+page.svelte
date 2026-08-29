@@ -1,6 +1,5 @@
 <script lang="ts">
-   
-   let email = $state('');
+	let email = $state('');
 
 	function recoverPassword() {
 		if (!email.trim()) {
@@ -11,6 +10,10 @@
 		alert(`Se enviará un enlace a ${email}`);
 	}
 
+	function handleSubmit(event: SubmitEvent) {
+		event.preventDefault();
+		recoverPassword();
+	}
 </script>
 <svelte:head>
 	<title>Recuperar contraseña</title>
@@ -31,7 +34,7 @@
 			Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña.
 		</p>
 
-		<form on:submit|preventDefault={recoverPassword}>
+		<form onsubmit={handleSubmit}>
 
 			<input
 				type="email"
