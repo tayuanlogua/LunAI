@@ -120,8 +120,131 @@ const listarCiclos = async (req, res) => {
     });
   }
 };
+const actualizarCiclo = async (req, res) => {
+  try {
+    const idCiclo = Number(req.params.id);
 
+    if (!Number.isInteger(idCiclo) || idCiclo <= 0) {
+      return res.status(400).json({
+        message: "El identificador del ciclo no es válido"
+      });
+    }
+
+    const {
+      fecha_inicio,
+      fecha_fin,
+      duracion_ciclo,
+      duracion_periodo,
+      fase_actual
+    } = req.body;
+
+    if (!fecha_inicio) {
+      return res.status(400).json({
+        message: "La fecha de inicio es obligatoria"
+      });
+    }
+
+    if (fecha_fin && fecha_fin < fecha_inicio) {
+      return res.status(400).json({
+        message: "La fecha final no puede ser anterior a la fecha inicial"
+      });
+    }
+
+    const resultado = await pool
+      .request()
+      .input("id_ciclo", sql.Int, idCiclo)
+      .input("id_usuario", sql.Int, req.usuario.id_usuario)
+      .input("fecha_inicio", sql.Date, fecha_inicio)
+      .input("fecha_fin", sql.Date, fecha_fin || null)
+      .input("duracion_ciclo", sql.Int, duracion_ciclo || null)
+      .input("duracion_periodo", sql.Int, duracion_periodo || null)
+      .input(
+        "fase_actual",
+        sql.VarChar(50),
+        fase_actual?.trim() || null
+      )
+      .query(`
+        UPDATE ciclos
+        SET
+          fecha_inicio = @fecha_inicio,
+          fecha_fin = @fecha_fin,
+          duracion_ciclo = @duracion_ciclo,
+          duracion_periodo = @duracion_periodo,
+          fase_actual = @fase_actual
+        OUTPUT
+          INSERTED.id_ciclo,
+          INSERTED.fecha_inicio,
+          INSERTED.fecha_fin,
+          INSERTED.duracion_ciclo,
+          INSERTED.duracion_periodo,
+          INSERTED.fase_actual
+        WHERE
+          id_ciclo = @id_ciclo
+          AND id_usuario = @id_usuario
+      `);
+
+    const ciclo = resultado.recordset[0];
+
+    if (!ciclo) {
+      return res.status(404).json({
+        message: "Ciclo no encontrado"
+      });
+    }
+
+    return res.json({
+      message: "Ciclo actualizado correctamente",
+      ciclo
+    });
+  } catch (error) {
+    console.error("Error actualizando ciclo:", error);
+
+    return res.status(500).json({
+      message: "No fue posible actualizar el ciclo"
+    });
+  }
+};
+const eliminarCiclo = async (req, res) => {
+  try {
+    const idCiclo = Number(req.params.id);
+
+    if (!Number.isInteger(idCiclo) || idCiclo <= 0) {
+      return res.status(400).json({
+        message: "El identificador del ciclo no es válido"
+      });
+    }
+
+    const resultado = await pool
+      .request()
+      .input("id_ciclo", sql.Int, idCiclo)
+      .input("id_usuario", sql.Int, req.usuario.id_usuario)
+      .query(`
+        DELETE FROM ciclos
+        OUTPUT DELETED.id_ciclo
+        WHERE
+          id_ciclo = @id_ciclo
+          AND id_usuario = @id_usuario
+      `);
+
+    if (resultado.recordset.length === 0) {
+      return res.status(404).json({
+        message: "Ciclo no encontrado"
+      });
+    }
+
+    return res.json({
+      message: "Ciclo eliminado correctamente"
+    });
+  } catch (error) {
+    console.error("Error eliminando ciclo:", error);
+
+    return res.status(500).json({
+      message: "No fue posible eliminar el ciclo"
+    });
+  }
+};
 module.exports = {
   crearCiclo,
-  listarCiclos
-};
+  listarCiclos,
+  actualizarCiclo,
+    eliminarCiclo
+  };

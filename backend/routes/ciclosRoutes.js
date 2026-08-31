@@ -2,7 +2,9 @@ const express = require("express");
 
 const {
   crearCiclo,
-  listarCiclos
+  listarCiclos,
+  actualizarCiclo,
+  eliminarCiclo
 } = require("../controllers/ciclosController");
 
 const {
@@ -13,5 +15,7 @@ const router = express.Router();
 
 router.post("/", verificarToken, crearCiclo);
 router.get("/", verificarToken, listarCiclos);
+router.put("/:id", verificarToken, actualizarCiclo);
+router.delete("/:id", verificarToken, eliminarCiclo);
 
 module.exports = router;
