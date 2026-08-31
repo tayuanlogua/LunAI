@@ -102,15 +102,15 @@ const iniciarSesion = async (req, res) => {
         sql.VarChar(100),
         correo.trim().toLowerCase()
       )
-      .query(`
-        SELECT
-          id_usuario,
-          nombre,
-          correo,
-          contrasena
-        FROM usuarios
-        WHERE correo = @correo
-      `);
+     .query(`
+  SELECT
+    id_usuario,
+    nombre,
+    correo,
+    contrasena
+  FROM usuarios
+  WHERE correo = @correo
+`);
 
     const usuario = resultado.recordset[0];
 
@@ -159,8 +159,48 @@ const iniciarSesion = async (req, res) => {
     });
   }
 };
+const obtenerPerfil = async (req, res) => {
+  try {
+    const resultado = await pool
+      .request()
+      .input(
+        "id_usuario",
+        sql.Int,
+        req.usuario.id_usuario
+      )
+      .query(`
+  SELECT
+    id_usuario,
+    nombre,
+    correo,
+    fecha_nacimiento,
+    fecha_registro
+  FROM usuarios
+  WHERE id_usuario = @id_usuario
+`);
+
+    const usuario = resultado.recordset[0];
+
+    if (!usuario) {
+      return res.status(404).json({
+        message: "Usuario no encontrado"
+      });
+    }
+
+    return res.json({
+      usuario
+    });
+  } catch (error) {
+    console.error("Error consultando perfil:", error);
+
+    return res.status(500).json({
+      message: "No fue posible consultar el perfil"
+    });
+  }
+};
 
 module.exports = {
   registrarUsuario,
-  iniciarSesion
+  iniciarSesion,
+  obtenerPerfil
 };
