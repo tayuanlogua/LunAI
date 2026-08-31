@@ -1,8 +1,10 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
     import { calcularTodo } from "$lib/clinical/scoreEngine";
     import { clinical } from "$lib/stores/clinical.store.svelte";
 
     let step = $state(1);
+    let enviandoRegistro = $state(false);
 
     let form = $state({
         //1. Cuenta
@@ -159,14 +161,100 @@
     });
 
     function siguiente() {
-        step++;
+    if (step === 1) {
+        if (!form.email.trim() || !form.password) {
+            alert('Completa el correo y la contraseña');
+            return;
+        }
+
+        if (form.password.length < 8) {
+            alert('La contraseña debe tener mínimo 8 caracteres');
+            return;
+        }
+
+        if (form.password !== form.confirmPassword) {
+            alert('Las contraseñas no coinciden');
+            return;
+        }
     }
 
+    step++;
+}
+async function registrarCuenta() {
+    if (!form.nombre.trim() || !form.birthDate) {
+        alert('Completa tu nombre y fecha de nacimiento');
+        return;
+    }
+
+    enviandoRegistro = true;
+
+    try {
+        const respuestaRegistro = await fetch(
+            'http://localhost:5000/api/auth/register',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    nombre: form.nombre.trim(),
+                    correo: form.email.trim(),
+                    contrasena: form.password,
+                    fecha_nacimiento: form.birthDate
+                })
+            }
+        );
+
+        const datosRegistro = await respuestaRegistro.json();
+
+        if (!respuestaRegistro.ok) {
+            alert(
+                datosRegistro.message ||
+                'No fue posible crear la cuenta'
+            );
+            return;
+        }
+
+        const respuestaLogin = await fetch(
+            'http://localhost:5000/api/auth/login',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    correo: form.email.trim(),
+                    contrasena: form.password
+                })
+            }
+        );
+
+        const datosLogin = await respuestaLogin.json();
+
+        if (!respuestaLogin.ok) {
+            alert('La cuenta fue creada, pero debes iniciar sesión');
+            await goto('/');
+            return;
+        }
+
+        localStorage.setItem('token', datosLogin.token);
+        localStorage.setItem(
+            'usuario',
+            JSON.stringify(datosLogin.usuario)
+        );
+
+        step++;
+    } catch (error) {
+        console.error(error);
+        alert('No fue posible conectar con el servidor');
+    } finally {
+        enviandoRegistro = false;
+    }
+}
     function atras() {
         step--;
     }
-
-    function finalizar() {
+async function finalizar() { 
         console.log("DATOS DEL FORMULARIO:");
         console.log(form);
         const resultados = calcularTodo(form);
@@ -178,7 +266,7 @@
         clinical.hipertiroidismo = resultados.hipertiroidismo;
         clinical.hashimoto = resultados.hashimoto;
         console.log("Resultados guardados:", clinical);
-        location.href = "/DashboardUser";
+      await goto('/DashboardUser');
 
         // Aquí puedes enviar los datos a tu API
         //location.href = "/"; // Redirige a la página de inicio de sesión después de finalizar
@@ -205,9 +293,9 @@
         <button onclick={siguiente}>
             Crear cuenta
         </button>
-        <a href="/login">
-            Volver a iniciar sesión
-        </a>
+       <a href="/">
+    Volver a iniciar sesión
+</a>
     </div>
     {/if}
     
@@ -263,9 +351,15 @@
 <div class="buttons">
     <button onclick={atras}>Atrás</button>
 
-    <button onclick={siguiente}>Siguiente</button>
-</div>
+   <button
+    type="button"
+    onclick={registrarCuenta}
+    disabled={enviandoRegistro}
+>
+    {enviandoRegistro ? 'Creando cuenta...' : 'Siguiente'}
+</button>
 
+</div>
 </div>
 {/if}
 
