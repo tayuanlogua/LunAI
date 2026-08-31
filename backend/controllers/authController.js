@@ -102,15 +102,14 @@ const iniciarSesion = async (req, res) => {
         sql.VarChar(100),
         correo.trim().toLowerCase()
       )
-      .query(`
+     .query(`
   SELECT
     id_usuario,
     nombre,
     correo,
-    fecha_nacimiento,
-    fecha_registro
+    contrasena
   FROM usuarios
-  WHERE id_usuario = @id_usuario
+  WHERE correo = @correo
 `);
 
     const usuario = resultado.recordset[0];
