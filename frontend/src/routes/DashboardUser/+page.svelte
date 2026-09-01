@@ -27,13 +27,11 @@
     {#if clinical.hipotiroidismo}
         <RiskCard resultado={clinical.hipotiroidismo} />
     {/if}
+
     {#if clinical.hipertiroidismo}
     <RiskCard resultado={clinical.hipertiroidismo} />
-{/if}
+    {/if}
 
-{#if clinical.hashimoto}
-    <RiskCard resultado={clinical.hashimoto} />
-{/if}
 
 <AgentChat
 			apiEndpoint="/api/agent/chat"

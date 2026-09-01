@@ -214,57 +214,6 @@ export function generarRecomendaciones(
 
 
 
-    //----------------------------------------
-    // Hashimoto
-    //----------------------------------------
-
-    if (
-        resultado.enfermedad === "Tiroiditis de Hashimoto"
-    ) {
-
-
-        recomendaciones.push({
-
-            titulo:
-                "Apoyo en autoinmunidad tiroidea",
-
-            descripcion:
-                "Hashimoto es una condición autoinmune donde el sistema inmunológico afecta la glándula tiroides.",
-
-            acciones: [
-
-                "Realizar controles hormonales periódicos.",
-
-                "Controlar niveles de estrés.",
-
-                "Mantener una alimentación equilibrada."
-
-            ],
-
-            alimentos: [
-
-                "Pescado rico en omega 3.",
-
-                "Huevos.",
-
-                "Verduras.",
-
-                "Frutos secos."
-
-            ],
-
-            evitar: [
-
-                "Eliminar grupos completos de alimentos sin supervisión.",
-
-                "Uso de suplementos sin estudios previos."
-
-            ]
-
-        });
-
-    }
-
 
 
     //----------------------------------------

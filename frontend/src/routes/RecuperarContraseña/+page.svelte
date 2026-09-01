@@ -1,4 +1,6 @@
 <script lang="ts">
+    import StartsBackground from "$lib/components/StartsBackground.svelte";
+
    
    let email = $state('');
 
@@ -12,6 +14,7 @@
 	}
 
 </script>
+<StartsBackground/>
 <svelte:head>
 	<title>Recuperar contraseña</title>
 </svelte:head>
@@ -47,7 +50,7 @@
 
 		<footer>
 
-			<a href="/login">
+			<a href="/">
 				Volver a iniciar sesión
 			</a>
 

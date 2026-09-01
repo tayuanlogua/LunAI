@@ -6,7 +6,7 @@ type ResultadosClinicos = {
     amenorrea: ResultadoClinico | null;
     hipotiroidismo: ResultadoClinico | null;
     hipertiroidismo: ResultadoClinico | null;
-    hashimoto: ResultadoClinico | null;
+   
 };
 
 export const clinical = $state<ResultadosClinicos>({
@@ -15,5 +15,5 @@ export const clinical = $state<ResultadosClinicos>({
     amenorrea: null,
     hipotiroidismo: null,
     hipertiroidismo: null,
-    hashimoto: null
+    
 });

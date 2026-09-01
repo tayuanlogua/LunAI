@@ -1,5 +1,6 @@
 <script lang="ts">
     import { calcularTodo } from "$lib/clinical/scoreEngine";
+    import StartsBackground from "$lib/components/StartsBackground.svelte";
     import { clinical } from "$lib/stores/clinical.store.svelte";
 
     let step = $state(1);
@@ -96,7 +97,7 @@
         antecedentesSOP: "",
         antecedentesEndometriosis: "",
         antecedentesHipotiroidismo: "",
-        antecedentesHashimoto: "",
+        antecedentes: "",
         antecedentesDiabetes: "",
         antecedentesCancerMama: "",
         antecedentesCancerOvario: "",
@@ -155,7 +156,7 @@
         medicamentosTiroides: "",
         diagnosticoHipotiroidismo: "",
         diagnosticoHipertiroidismo: "",
-        diagnosticoHashimoto: ""
+        diagnostico: ""
     });
 
     function siguiente() {
@@ -176,7 +177,7 @@
         clinical.amenorrea = resultados.amenorrea;
         clinical.hipotiroidismo = resultados.hipotiroidismo;
         clinical.hipertiroidismo = resultados.hipertiroidismo;
-        clinical.hashimoto = resultados.hashimoto;
+        
         console.log("Resultados guardados:", clinical);
         location.href = "/DashboardUser";
 
@@ -186,7 +187,7 @@
 
 </script>
 
-
+<StartsBackground/>
 <div class ="main-container">
 
 <!-- Paso 1 - Crear cuenta -->
@@ -205,7 +206,7 @@
         <button onclick={siguiente}>
             Crear cuenta
         </button>
-        <a href="/login">
+        <a href="/">
             Volver a iniciar sesión
         </a>
     </div>
@@ -460,7 +461,7 @@
     <input bind:value={form.antecedentesSOP} placeholder="Síndrome de ovario poliquístico (SOP)">
     <input bind:value={form.antecedentesEndometriosis} placeholder="Endometriosis">
     <input bind:value={form.antecedentesHipotiroidismo} placeholder="Hipotiroidismo">
-    <input bind:value={form.antecedentesHashimoto} placeholder="Enfermedad de Hashimoto">
+    <input bind:value={form.antecedentes} placeholder="Enfermedad de ">
     <input bind:value={form.antecedentesDiabetes} placeholder="Diabetes">
     <input bind:value={form.antecedentesCancerMama} placeholder="Cáncer de mama">
     <input bind:value={form.antecedentesCancerOvario} placeholder="Cáncer de ovario">
@@ -563,7 +564,7 @@
     <input bind:value={form.medicamentosTiroides} placeholder="Uso de medicamentos para la tiroides">
     <input bind:value={form.diagnosticoHipotiroidismo} placeholder="Diagnóstico de hipotiroidismo">
     <input bind:value={form.diagnosticoHipertiroidismo} placeholder="Diagnóstico de hipertiroidismo">
-    <input bind:value={form.diagnosticoHashimoto} placeholder="Diagnóstico de Hashimoto">
+    <input bind:value={form.diagnostico} placeholder="Diagnóstico de ">
     <div class="buttons">
         <button onclick={atras}>Atrás</button>
         <button onclick={finalizar}>Finalizar</button>
@@ -857,13 +858,5 @@ button:hover {
 
     }
 
-}
-:global(body){
-    background-image:
-    url("/estrellas.jpg"),
-    linear-gradient(#050505,#000);
-    
-    background-size:cover;
-    background-position:center;
 }
 </style>

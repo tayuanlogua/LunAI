@@ -193,7 +193,7 @@
 
 			<CatMascot
 				{mood}
-				size={350}
+				size={300}
 			/>
 
 			<div class="mascot-copy">
