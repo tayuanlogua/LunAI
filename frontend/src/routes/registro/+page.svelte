@@ -809,12 +809,7 @@ button:hover {
 
 }
 
-.btnlogin {
-    width: 100%;
-    background: linear-gradient(90deg, #f6d45d, #e3bc3b);
-    color: #111;
-    box-shadow: 0 0 30px rgba(255,213,79,.35);
-}
+
 
 /* Animación al cambiar de paso */
 
@@ -859,4 +854,5 @@ button:hover {
     }
 
 }
+
 </style>
