@@ -106,7 +106,7 @@
         {/if}
 
         <AgentChat
-            apiEndpoint="/api/agent/chat"
+            apiEndpoint="http://localhost:5000/api/agent/chat"
             title="LunAI"
             subtitle="Tu compañera inteligente"
         />

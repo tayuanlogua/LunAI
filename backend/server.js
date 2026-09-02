@@ -6,6 +6,7 @@ const { conectarBaseDatos } = require("./config/database");
 const authRoutes = require("./routes/authRoutes");
 const ciclosRoutes = require("./routes/ciclosRoutes");
 const sintomasRoutes = require("./routes/sintomasRoutes");
+const agentRoutes = require("./routes/agentRoutes");
 const app = express();
 
 app.use(cors({
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/ciclos", ciclosRoutes);
 app.use("/api/sintomas", sintomasRoutes);
+app.use("/api/agent", agentRoutes);
 app.get("/", (req, res) => {
   res.send("Backend de LunAI funcionando");
 });

@@ -68,10 +68,17 @@ import CatMascot from './CatMascot.svelte';
 		scrollToBottom();
 
 		try {
+			const token = localStorage.getItem('token');
+
+			if (!token) {
+				throw new Error('Debes iniciar sesión');
+			}
+
 			const response = await fetch(apiEndpoint, {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`
 				},
 				body: JSON.stringify({
 					message: content,
@@ -90,11 +97,13 @@ import CatMascot from './CatMascot.svelte';
 				})
 			});
 
-			if (!response.ok) {
-				throw new Error(`Agent API error: ${response.status}`);
-			}
-
 			const data: AgentResponse = await response.json();
+
+			if (!response.ok) {
+				throw new Error(
+					data.message ?? `Agent API error: ${response.status}`
+				);
+			}
 
 			const assistantMessage: Message = {
 				id: crypto.randomUUID(),
