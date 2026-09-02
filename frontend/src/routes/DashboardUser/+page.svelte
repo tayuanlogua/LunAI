@@ -128,14 +128,12 @@
         padding: 0 35px 15px;
     }
 
-    .acciones-sesion button {
-        padding: 10px 18px;
-        border: 1px solid rgba(232, 201, 104, 0.4);
-        border-radius: 10px;
-        background: rgba(232, 201, 104, 0.12);
-        color: #f0d270;
-        cursor: pointer;
-    }
+    .acciones-sesion {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 0 35px 15px;
+}
 
     .acciones-sesion button:hover {
         background: rgba(232, 201, 104, 0.22);
