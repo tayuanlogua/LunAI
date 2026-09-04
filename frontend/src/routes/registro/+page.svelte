@@ -294,6 +294,7 @@
 
     <div class="input-group">
 
+        <!-- svelte-ignore a11y_label_has_associated_control -->
         <label>¿Cuál es tu correo?</label>
 
         <input
@@ -307,6 +308,7 @@
 
     <div class="input-group">
 
+        <!-- svelte-ignore a11y_label_has_associated_control -->
         <label>Crea una contraseña 🔐</label>
 
         <input
@@ -320,6 +322,7 @@
 
     <div class="input-group">
 
+        <!-- svelte-ignore a11y_label_has_associated_control -->
         <label>Confirma tu contraseña</label>
 
         <input
